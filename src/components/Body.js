@@ -1,13 +1,14 @@
 import RestaurantCard, {withPromotedLabel} from "./RestaurantCard";
-import { useState,useEffect } from "react";
+import { useState,useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-
-
+import UserContext from "../utils/UserContext";
 
 const Body =()=> {
 const [filteredRestraunts, setFilteredRestraunts]= useState([]);
 const [filterBySearch,setFilterBySearch]= useState([])
 const [searchData, setSearchData] = useState("")
+
+const {loggedInUser, setUserName} = useContext(UserContext)
 
 const RestaurantCardNewlyOpened = withPromotedLabel(RestaurantCard);
 
@@ -49,6 +50,9 @@ const fetchData = async ()=> {
             setFilterBySearch(filterBySearchData)
           }}
            className="ml-4 text-white bg-purple-700 hover:bg-purple-800 focus:outline-none rounded-full text-sm px-4 py-2 font-medium ">Search</button>
+         </div>
+         <div className="p-7">
+         <input type="text" placeholder="Enter Username" className="border border-gray-300 rounded-lg w-80 outline-none p-1" onChange={(e)=> setUserName(e.target.value)} value={loggedInUser}/>
          </div>
         </div>
         <div className="flex flex-wrap ">
